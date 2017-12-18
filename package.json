@@ -1,0 +1,22 @@
+{
+  "name": "tubemail-mdns",
+  "version": "1.0.0",
+  "description": "Tube Mail peer discovery using mDNS",
+  "main": "mdns.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jue89/node-tubemail-mdns.git"
+  },
+  "keywords": [
+    "mdns"
+  ],
+  "author": "Juergen Fitschen <me@jue.yt>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jue89/node-tubemail-mdns/issues"
+  },
+  "homepage": "https://github.com/jue89/node-tubemail-mdns#readme",
+  "dependencies": {
+    "mdns": "^2.3.4"
+  }
+}
