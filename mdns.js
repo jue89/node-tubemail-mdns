@@ -5,6 +5,7 @@ module.exports = () => (port, needle, cb) => {
 
 	// Advertisment of the local peer
 	const ad = mdns.createAdvertisement(needle, port, { name: 'Tubemail Peer' });
+	ad.on('error', (err) => console.log('MDNS Advertisement Error', err));
 	ad.start();
 
 	// Searching for remote peers
@@ -14,6 +15,7 @@ module.exports = () => (port, needle, cb) => {
 		mdns.rst.makeAddressesUnique()
 	]});
 	browser.on('serviceUp', (service) => cb(service));
+	browser.on('error', (err) => console.log('MDNS Browser Error', err));
 	browser.start();
 
 	// Return stop method
