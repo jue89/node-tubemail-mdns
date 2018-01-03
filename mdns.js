@@ -4,7 +4,7 @@ module.exports = () => (port, needle, cb) => {
 	needle = mdns.tcp('tm-' + needle.slice(0, 12));
 
 	// Advertisment of the local peer
-	const ad = mdns.createAdvertisement(needle, port, { name: 'Tubemail Peer' });
+	const ad = mdns.createAdvertisement(needle, port, { name: `Tubemail Peer ${port}` });
 	ad.on('error', (err) => console.log('MDNS Advertisement Error', err));
 	ad.start();
 
