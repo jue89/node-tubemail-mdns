@@ -1,28 +1,17 @@
-const mdns = require('mdns');
+const Bonjour = require('bonjour-hap');
 
 module.exports = (opts = {}) => (port, needle, cb) => {
-	needle = mdns.tcp('tm-' + needle.slice(0, 12));
+	const mdns = new Bonjour();
+
+	const type = `tm-${needle.slice(0, 12)}`;
+	const name = opts.name || `Tubemail Peer ${port}`
 
 	// Advertisment of the local peer
-	const ad = mdns.createAdvertisement(needle, port, {
-		name: opts.name || `Tubemail Peer ${port}`
-	});
-	ad.on('error', (err) => console.log('MDNS Advertisement Error', err));
-	ad.start();
+	mdns.publish({type, port, name});
 
 	// Searching for remote peers
-	const browser = mdns.createBrowser(needle, {resolverSequence: [
-		mdns.rst.DNSServiceResolve(),
-		'DNSServiceGetAddrInfo' in mdns.dns_sd ? mdns.rst.DNSServiceGetAddrInfo({families:[0]}) : mdns.rst.getaddrinfo({families:[0]}),
-		mdns.rst.makeAddressesUnique()
-	]});
-	browser.on('serviceUp', (service) => cb(service));
-	browser.on('error', (err) => console.log('MDNS Browser Error', err));
-	browser.start();
+	mdns.find({type}, (service) => cb(service));
 
 	// Return stop method
-	return () => {
-		ad.stop();
-		browser.stop();
-	};
+	return () => mdns.destroy();
 };

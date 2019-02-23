@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/jue89/node-tubemail-mdns#readme",
   "dependencies": {
-    "mdns": "^2.3.4"
+    "bonjour-hap": "^3.5.1"
   }
 }
