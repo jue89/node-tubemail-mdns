@@ -1,6 +1,6 @@
 {
   "name": "tubemail-mdns",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Tube Mail peer discovery using mDNS",
   "main": "mdns.js",
   "repository": {
